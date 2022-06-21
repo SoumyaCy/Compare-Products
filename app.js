@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const Ports = 5000;
 const getFlipkartProducts = require("./Website/flipkart");
-const getAmazonProducts = require("./Website/flipkart");
+const getAmazonProducts = require("./Website/amazon");
 
 app.get("/", async (req, res) => {
   const flipkartProducts = await require("./Website/flipkart");

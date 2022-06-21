@@ -1,54 +1,94 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FormRow } from "../components/FormRow";
 import { useProductContext } from "../context/ProductContext";
 import { UpArrow, DownArrow } from "../components/arrows";
-import axios from "axios";
+import { Card } from "../components/Card";
+const fp = JSON.parse(localStorage.getItem("fProds"));
+const ap = JSON.parse(localStorage.getItem("aProds"));
 
 export const SearchPage = () => {
-  const { productSearch, setProductSearch } = useProductContext();
+  const { nextSortOrder, getProducts, setSortOrder } = useProductContext();
+  const [finalProductsF, setFinalProductsF] = useState([]);
+  const [finalProductsA, setFinalProductsA] = useState([]);
+  const [searchParam, setSearchParam] = useState("shoes");
 
-  const { sortOrder } = productSearch;
-  let newOrder = "";
   const handleChange = (e) => {
-    // console.log(e.target.name);
-    setProductSearch((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
+    setSearchParam(e.target.value);
   };
-  //api call
-  const getProducts = async () => {
-    const response = await axios.get(`/${productSearch.search}`);
-    const { flipkart } = response.data.productFlipkart;
-    const { amazon } = response.data.productAmazon;
-    console.log(flipkart, amazon);
-  };
+  const getSortedProducts = async () => {
+    const { flipkartArrayResponse, amazonArrayResponse } = await setSortOrder();
 
+    setFinalProductsF([...flipkartArrayResponse]);
+    setFinalProductsA([...amazonArrayResponse]);
+  };
+  useEffect(() => {
+    fp && setFinalProductsF([...fp]);
+    ap && setFinalProductsA([...ap]);
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { flipkartArrayResponse, amazonArrayResponse } = await getProducts(
+      searchParam
+    );
+
+    setFinalProductsF([...flipkartArrayResponse]);
+    setFinalProductsA([...amazonArrayResponse]);
+  };
   return (
     <div>
-      <FormRow
-        type="text"
-        value={productSearch.search}
-        name="search"
-        onChange={handleChange}
-      />
+      <form className="form" action="post" onSubmit={handleSubmit}>
+        <FormRow
+          type="text"
+          value={searchParam}
+          name="search"
+          onChange={handleChange}
+        />
 
-      <button
-        onClick={() => {
-          sortOrder === "desc" ? (newOrder = "asc") : (newOrder = "desc");
-          setProductSearch((prev) => {
-            return { ...prev, sortOrder: newOrder };
-          });
-        }}
-      >
+        <button className="btn" type="submit">
+          Search
+        </button>
+      </form>
+      <button onClick={getSortedProducts}>
         Sort by price
-        {sortOrder === "" || sortOrder === "asc" ? <UpArrow /> : <DownArrow />}
-      </button>
-
-      <button type="submit" onClick={getProducts}>
-        Search
+        {nextSortOrder === "" || nextSortOrder === "asc" ? (
+          <UpArrow />
+        ) : (
+          <DownArrow />
+        )}
       </button>
       <Link to="/">LandingPage</Link>
+      <div className="product-card-container">
+        {finalProductsA.length === 0 && finalProductsA.length === 0 ? (
+          <p>products are loading</p>
+        ) : (
+          finalProductsA.map((eachProduct, index) => {
+            return (
+              <Card
+                key={index}
+                image={eachProduct.image}
+                name={eachProduct.name}
+                desc={eachProduct.desc}
+                link={eachProduct.link}
+                price={eachProduct.price}
+              />
+            );
+          })
+        )}
+        {finalProductsF.map((eachProduct, index) => {
+          return (
+            <Card
+              key={index}
+              image={eachProduct.image}
+              name={eachProduct.name}
+              desc={eachProduct.desc}
+              link={eachProduct.link}
+              price={eachProduct.price}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
