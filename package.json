@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,8 +14,13 @@
     "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.11",
     "express": "^4.18.1",
+<<<<<<< HEAD
     "puppeteer-cluster": "^0.23.0",
+=======
+    "history": "^5.3.0",
+>>>>>>> b28a14cbd22a6fa64bc804878d3106c46b9ce693
     "puppeteer-core": "^14.2.0",
+    "react-router-dom": "^6.3.0",
     "ws": "^8.7.0"
   },
   "devDependencies": {
