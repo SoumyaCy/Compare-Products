@@ -8,23 +8,8 @@ const {
   Description,
 } = require("../Xpaths/amazonXpaths");
 
-<<<<<<< HEAD
 const productFunction = async () => {
   const URL = `https://www.amazon.in/s?k=${Search}`;
-=======
-const productFunction = async (searchParameter) => {
-  var searchItem = searchParameter.split(" ");
-  if (searchItem[0]) {
-    var finalUrlString = searchItem[0];
-  }
-
-  for (let i = 1; i < searchItem.length; i++) {
-    if (searchItem[i] != "") {
-      finalUrlString += "%20" + searchItem[i];
-    }
-  }
-  const URL = `https://www.amazon.in/s?k=${finalUrlString}`;
->>>>>>> b28a14cbd22a6fa64bc804878d3106c46b9ce693
   const browser = await puppeteer.launch({
     headless: false,
     ignoreHTTPSErrors: true,
