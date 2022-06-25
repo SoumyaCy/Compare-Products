@@ -9,17 +9,7 @@ const {
 } = require("../Xpaths/amazonXpaths");
 
 const productFunction = async () => {
-  var searchItem = Search.split(" ");
-  if (searchItem[0]) {
-    var finalUrlString = searchItem[0];
-  }
-
-  for (let i = 1; i < searchItem.length; i++) {
-    if (searchItem[i] != "") {
-      finalUrlString += "%20" + searchItem[i];
-    }
-  }
-  const URL = `https://www.amazon.in/s?k=${finalUrlString}`;
+  const URL = `https://www.amazon.in/s?k=${Search}`;
   const browser = await puppeteer.launch({
     headless: false,
     ignoreHTTPSErrors: true,
