@@ -8,8 +8,8 @@ const {
   Link,
 } = require("../Xpaths/flipkartXpaths");
 
-const productFunction = async () => {
-  var searchItem = Search.split(" ");
+const productFunction = async (searchParameter) => {
+  var searchItem = searchParameter.split(" ");
   if (searchItem[0]) {
     var finalUrlString = searchItem[0];
   }
@@ -68,4 +68,4 @@ const productFunction = async () => {
   return products;
 };
 
-module.exports = productFunction();
+module.exports = productFunction;
