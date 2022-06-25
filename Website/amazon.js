@@ -21,7 +21,7 @@ const productFunction = async (searchParameter) => {
   }
   const URL = `https://www.amazon.in/s?k=${finalUrlString}`;
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     ignoreHTTPSErrors: true,
   });
   const page = await browser.newPage();

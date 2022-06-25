@@ -21,7 +21,7 @@ const productFunction = async (searchParameter) => {
   }
   const URL = `https://www.flipkart.com/search?q=${finalUrlString}`;
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     ignoreHTTPSErrors: true,
   });
   const page = await browser.newPage();
