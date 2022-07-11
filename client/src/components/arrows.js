@@ -1,6 +1,6 @@
 import React from "react";
-import upArr from "../assets/upArrow.svg";
-import downArr from "../assets/downArrow.svg";
+import upArr from "../assets/icons/upArrow.svg";
+import downArr from "../assets/icons/downArrow.svg";
 
 export const UpArrow = () => {
   return (

@@ -1,8 +1,15 @@
 import React from "react";
 
-export const FormRow = ({ type, name, onChange, labelText, value }) => {
+export const FormRow = ({
+  type,
+  name,
+  onChange,
+  labelText,
+  value,
+  className,
+}) => {
   return (
-    <div className="form-row">
+    <div className={className ? className : "form-row"}>
       <label htmlFor={name} className="form-label">
         {labelText}
       </label>

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FormRow } from "../components/FormRow";
+import { IoArrowUpCircleSharp, IoArrowDownCircle } from "react-icons/io5";
+
 import { useProductContext } from "../context/ProductContext";
-import { UpArrow, DownArrow } from "../components/arrows";
+
 import { Card } from "../components/Card";
+import "../styles/Search.css";
 const fp = JSON.parse(localStorage.getItem("fProds"));
 const ap = JSON.parse(localStorage.getItem("aProds"));
 
@@ -11,7 +13,7 @@ export const SearchPage = () => {
   const { nextSortOrder, getProducts, setSortOrder } = useProductContext();
   const [finalProductsF, setFinalProductsF] = useState([]);
   const [finalProductsA, setFinalProductsA] = useState([]);
-  const [searchParam, setSearchParam] = useState("shoes");
+  const [searchParam, setSearchParam] = useState("");
 
   const handleChange = (e) => {
     setSearchParam(e.target.value);
@@ -37,8 +39,21 @@ export const SearchPage = () => {
     setFinalProductsA([...amazonArrayResponse]);
   };
   return (
-    <div>
-      <form className="form" action="post" onSubmit={handleSubmit}>
+    <div className="search-page-container">
+      <div className="logo-container"></div>
+      <span className="heading-text">SCRAPER</span>
+      <span className="Flipkart-heading">Flipkart</span>
+      <span className="Amazon-heading">Amazon</span>
+      <div className="seperator"></div>
+      <input
+        className="form-search-page"
+        type="text"
+        placeholder="Search your products"
+        value={searchParam}
+        name="search"
+        onChange={handleChange}
+      />
+      {/* <form className="form-search-page" action="post">
         <FormRow
           type="text"
           value={searchParam}
@@ -46,43 +61,46 @@ export const SearchPage = () => {
           onChange={handleChange}
         />
 
-        <button className="btn" type="submit">
-          Search
-        </button>
-      </form>
-      <button onClick={getSortedProducts}>
-        Sort by price
+      </form> */}
+      <button className="btn-submit" type="button" onClick={handleSubmit}>
+        Search
+      </button>
+      <button className="btn-sort" onClick={getSortedProducts}>
+        Sort
         {nextSortOrder === "" || nextSortOrder === "asc" ? (
-          <UpArrow />
+          <IoArrowUpCircleSharp />
         ) : (
-          <DownArrow />
+          <IoArrowDownCircle />
         )}
       </button>
-      <Link to="/">LandingPage</Link>
+      <Link className="home-logo" to="/"></Link>
       <div className="product-card-container">
-        {finalProductsA.length === 0 && finalProductsA.length === 0 ? (
+        {
+          /* {finalProductsA.length === 0 && finalProductsA.length === 0 ? (
           <p>products are loading</p>
-        ) : (
+        ) : ( */
           finalProductsA.map((eachProduct, index) => {
             return (
               <Card
+                company="amazon"
+                index={index}
                 key={index}
                 image={eachProduct.image}
                 name={eachProduct.name}
-                desc={eachProduct.desc}
                 link={eachProduct.link}
                 price={eachProduct.price}
               />
             );
           })
-        )}
+        }
         {finalProductsF.map((eachProduct, index) => {
           return (
             <Card
+              company="flipkart"
+              index={index}
               key={index}
               image={eachProduct.image}
               name={eachProduct.name}
-              desc={eachProduct.desc}
               link={eachProduct.link}
               price={eachProduct.price}
             />
