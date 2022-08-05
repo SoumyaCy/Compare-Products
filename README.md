@@ -7,7 +7,7 @@ Ensure nvm and npm are installed globally
 
 Install the correct version of Node
 
-nvm install
+npm install
 Install dependencies
 
 npm install
