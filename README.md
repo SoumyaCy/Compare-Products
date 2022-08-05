@@ -7,8 +7,9 @@ A tool that compares the search results of both amazon and flipkart at a single 
 2.Ensure nvm and npm are installed globally
 
 3.Install the correct version of Node
-
+```
 $ nvm install
+```
 4.Install dependencies
 
 $ npm install
