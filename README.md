@@ -20,10 +20,10 @@ $ npm start
 ```
 6.In the Search page use the search bar to look for the search results in various e-commerce websites simultaneously.
 
-#Landing Page
+# Landing Page
 ![image](https://user-images.githubusercontent.com/56735635/183154239-87f6361e-3428-4430-bd0d-33af5e50b192.png)
 
 
 
-#Search Page
+# Search Page
 ![image](https://user-images.githubusercontent.com/56735635/183154128-a7b0596e-4c67-4a58-a322-5c93401807ab.png)
