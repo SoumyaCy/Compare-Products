@@ -11,11 +11,13 @@ A tool that compares the search results of both amazon and flipkart at a single 
 $ nvm install
 ```
 4.Install dependencies
-
+```
 $ npm install
+```
 5.Run the React app on http://localhost:3000 and the Node server on http://localhost:5000
-
+```
 $ npm start
+```
 6.In the Search page use the search bar to look for the search results in various e-commerce websites simultaneously.
 
 #Landing Page
